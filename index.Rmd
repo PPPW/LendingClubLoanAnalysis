@@ -1,22 +1,34 @@
 ---
-title: "Lending Club Loan Analysis"
+title: "Lending Club Loan Data Analysis"
 author: "Pei Wang"
-date: "October 30, 2015"
+date: "October 31, 2015"
 output: html_document
 ---
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+# Introduction
+The Lending Club is a large online marketplace for facilitating personal and business loans, with a total funded loans of more than 13 billion dollars to date. It it the first peer-to-peer lending company registered with the Securities and Exchange Commission (SEC). As the historical loan data are available for free, investors can build portfolios based on information such as borrowers' credit rating, location, education level, debt to income ratio, the description of borrowing purpose, etc. The investors' returns are determined by the interest rate and the default probability. The goal of this project is to analyse these factors using machine learning techniques to find the optimal trading strategy on this platform.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+# Data source
+Lending Club's operational information and statistics are public. This project will use the loan data from 2007 to now, downloaded from [here](https://www.lendingclub.com/info/download-data.action). 
 
-```{r}
-summary(cars)
-```
+# Exploratry Data Analysis
 
-You can also embed plots, for example:
+## Figure 1
+The first set of figures show the borrowers' geographic information, in 2015. The data set has no information for Iowa and Idaho. 
 
-```{r, echo=FALSE}
-plot(cars)
-```
+The top figure shows the median income in color of different states, where the numbers on the map indicates loans issued in the corresponding states. 
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+The middle figure shows the median interest rate in different states of the whole year, and the bottom figure shows the changing of the median interest rate month by month.
+
+<img class=center src=./fig/income.png height=450>
+<img class=center src=./fig/interest.png height=450>
+<img class=center src=./fig/int_evolv.gif height=450>
+
+## Figure 2
+An important task of this project is to predict the default probability (the risk), which can be approximatedly obtained from the loan status. The loan status can be: Issued, Current, Fully Paid, In Grace Period   
+Late (16-30 days), Late (31-120 days), Charged Off, Default. To predict the loan status, the rest features need to be processed according their natures. This figure shows the importance of features from a xgboost model. 
+<img class=center src=./fig/xgb.png height=450>
+
+# Future plan
+The model can be improved by applying more data preprocessing and feature engineering. For example, natural language processing techniques can be used to extract the borrowers' description. By analysing more historial data, the model will be more reliable. Finally, the portfolio selection strategy needs to be validated by back testing.
+
