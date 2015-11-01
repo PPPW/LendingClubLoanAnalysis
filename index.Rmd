@@ -6,15 +6,17 @@ output: html_document
 ---
 
 # Introduction
-The Lending Club is a large online marketplace for facilitating personal and business loans, with a total funded loans of more than 13 billion dollars to date. It it the first peer-to-peer lending company registered with the Securities and Exchange Commission (SEC). As the historical loan data are available for free, investors can build portfolios based on information such as borrowers' credit rating, location, education level, debt to income ratio, the description of borrowing purpose, etc. The investors' returns are determined by the interest rate and the default probability. The goal of this project is to analyse these factors using machine learning techniques to find the optimal trading strategy on this platform.
+The Lending Club is a large online marketplace for facilitating personal and business loans, with total funded loans of more than 13 billion dollars to date. It it the first peer-to-peer lending company registered with the Securities and Exchange Commission (SEC). Investing in lending club's loans can give very high return, for the interest rate can be as high as 28%. However, loans with higher interest rate are more likely to default, which will reduce investors' return. A better quantitative model of the risk will significantly increase the investors' profit and decrease the loss.
+
+A risk model can be build by analyzing the historical loan data from the Lending Club. These data include information such as borrowers' credit rating, location, education level, debt to income ratio, the description of borrowing purpose, etc. The goal of this project is to find the optimal trading strategy on this platform by analyze the historical data using machine learning techniques.
 
 # Data source
-Lending Club's operational information and statistics are public. This project will use the loan data from 2007 to now, downloaded from [here](https://www.lendingclub.com/info/download-data.action). 
+Lending Club's operational information and statistics can be downloaded from [here](https://www.lendingclub.com/info/download-data.action). This project will use the loan data from 2007 to now.
 
 # Exploratry Data Analysis
 
 ## Figure 1
-The first set of figures show the borrowers' geographic information, in 2015. The data set has no information for Iowa and Idaho. 
+The first set of figures show the borrowers' geographic information in 2015. The data set has no information for Iowa and Idaho so these two states are blank on the map.
 
 The top figure shows the median income in color of different states, where the numbers on the map indicates loans issued in the corresponding states. 
 
@@ -25,10 +27,14 @@ The middle figure shows the median interest rate in different states of the whol
 <img class=center src=./fig/int_evolv.gif height=450>
 
 ## Figure 2
-An important task of this project is to predict the default probability (the risk), which can be approximatedly obtained from the loan status. The loan status can be: Issued, Current, Fully Paid, In Grace Period   
-Late (16-30 days), Late (31-120 days), Charged Off, Default. To predict the loan status, the rest features need to be processed according their natures. This figure shows the importance of features from a xgboost model. 
+An important task of this project is to predict the default probability (a measure of the risk). To do this, we first build a model to predict the loan status, then use the result to approximate the default probability. The loan status can be: Issued, Current, Fully Paid, In Grace Period Late (16-30 days), Late (31-120 days), Charged Off, Default. All the features from the rest of the data are processed according their own nature, and a subset is selected for predicting the loan status. This figure shows the importance of features from a gradient boosting model (xgboost), for the loan data in 2015. 
 <img class=center src=./fig/xgb.png height=450>
 
 # Future plan
-The model can be improved by applying more data preprocessing and feature engineering. For example, natural language processing techniques can be used to extract the borrowers' description. By analysing more historial data, the model will be more reliable. Finally, the portfolio selection strategy needs to be validated by back testing.
+
+* Improve the risk prediction by applying more data processing and feature engineering. For example, natural language processing techniques can be used to process the borrowers' description of why they borrow the money.
+* Use the predicted risk to build and back test trading strategies.
+* More visualizations to present data and results.
+* Make a data product, such as a web app, to recommend trading strategies to users according to their demands.
+
 
